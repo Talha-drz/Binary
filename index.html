@@ -2,7 +2,8 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Zoom yapabilmek için user-scalable=yes ekledik -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
   <title>Binary Çevirici</title>
   <style>
     body {
@@ -22,36 +23,36 @@
       color: white;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
       text-align: center;
-      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      font-size: 2.5rem; /* Daha büyük başlık */
     }
 
     h3 {
-      margin-top: 20px;
+      margin-top: 30px;
       color: #fff;
-      font-size: clamp(1rem, 4vw, 1.3rem);
+      font-size: 1.8rem; /* Daha büyük ara başlık */
     }
 
     textarea {
       width: 95%;
-      max-width: 500px;
-      min-height: 100px;
-      margin: 10px 0;
-      padding: 12px;
+      max-width: 600px;
+      min-height: 150px; /* Daha yüksek textarea */
+      margin: 15px 0;
+      padding: 20px; /* Daha geniş padding */
       border: none;
-      border-radius: 10px;
-      font-size: 1rem;
+      border-radius: 15px;
+      font-size: 1.4rem; /* Daha büyük yazı */
       resize: none;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     button, select {
-      padding: 12px 20px;
-      margin: 10px;
+      padding: 18px 25px; /* Daha büyük butonlar */
+      margin: 15px;
       background: #fff;
       color: #0078ff;
       border: none;
-      border-radius: 8px;
-      font-size: 1rem;
+      border-radius: 12px;
+      font-size: 1.5rem; /* Daha büyük yazı */
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s ease;
@@ -64,14 +65,22 @@
       transform: scale(1.05);
     }
 
-    /* Mobilde butonları tam genişlik yap */
-    @media (max-width: 600px) {
-      button, select {
-        width: 90%;
-        font-size: 1.1rem;
+    /* Mobilde daha da büyütelim */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+      h3 {
+        font-size: 2rem;
       }
       textarea {
-        font-size: 1rem;
+        min-height: 200px;
+        font-size: 1.6rem;
+      }
+      button, select {
+        width: 95%;
+        font-size: 1.8rem;
+        padding: 20px;
       }
     }
   </style>
@@ -80,7 +89,7 @@
   <h1>✨ Binary ↔ Metin Çevirici ✨</h1>
 
   <!-- Bit seçimi -->
-  <label style="color:white; font-weight:bold;">
+  <label style="color:white; font-weight:bold; font-size:1.6rem;">
     Bit uzunluğu:
     <select id="bitLength">
       <option value="7">7-bit</option>
