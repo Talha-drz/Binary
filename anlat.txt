@@ -1,0 +1,14 @@
+Binary ↔ Text Converter
+Bu proje, 7-bit ve 8-bit ASCII karakterleri arasında dönüşüm yapan basit bir web uygulamasıdır. Kullanıcı arayüzü modern, mobil uyumlu ve kullanıcı dostu olacak şekilde tasarlanmıştır.
+
+Binary’den metne ve metinden binary’e çift yönlü çeviri desteği
+
+7-bit ve 8-bit seçim imkânı
+
+Otomatik dönüşüm + kısa “beep” sesli geri bildirim
+
+Sonuçları panoya kopyalama butonları
+
+Responsive (mobil uyumlu) tasarım
+
+HTML, CSS ve Vanilla JavaScript ile geliştirilmiştir.
