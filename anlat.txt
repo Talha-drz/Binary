@@ -1,3 +1,6 @@
+<img width="1919" height="1079" alt="Ekran görüntüsü 2025-08-27 173101" src="https://github.com/user-attachments/assets/432eac7e-ba3f-46fd-97e2-52124f111471" />
+
+
 Binary ↔ Metin Çevirici,
 binary verileri metne ve metinleri binary’ye dönüştüren basit ama işlevsel bir web uygulamasıdır.
 7-bit ve 8-bit ASCII desteği ile hem eski hem modern sistemlerle uyumludur.
