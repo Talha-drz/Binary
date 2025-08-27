@@ -1,3 +1,7 @@
+<img width="1919" height="1079" alt="Ekran görüntüsü 2025-08-27 173101" src="https://github.com/user-attachments/assets/432eac7e-ba3f-46fd-97e2-52124f111471" />
+
+
+
 # ✨ Binary ↔ Metin Çevirici
 
 Bu proje, binary verileri metne ve metinleri binary veriye dönüştürmek için geliştirilmiş **web tabanlı bir uygulamadır**.  
