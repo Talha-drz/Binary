@@ -86,7 +86,7 @@
   </style>
 </head>
 <body>
-  <h1>✨ Binary ↔ Metin Çevirici ✨</h1>
+  <h1>✨ Binary ↔ Metin ↔ Decimal Çevirici ✨</h1>
 
   <!-- Bit seçimi -->
   <label style="color:white; font-weight:bold; font-size:1.6rem;">
@@ -97,19 +97,33 @@
     </select>
   </label>
 
+  <h3>Ondalık Decimal</h3>
+  <textarea id="decimalInput" placeholder="Örn: 78 101 108 108 111"></textarea><br>
+  
+    <button onclick="copyDecimal()">📋 Decimal Kopyala</button>
+
   <h3>Binary'den Metne</h3>
   <textarea id="binaryInput" placeholder="Örn: 01001000 01100101 01101100 01101100 01101111"></textarea><br>
-  <button onclick="copybinary()">📋 Binary Kopyala</button>
+  
+    <button onclick="copyBinary()">📋 Binary Kopyala</button>
 
   <h3>Metinden Binary'ye</h3>
   <textarea id="textInput" placeholder="Örn: Hello"></textarea><br>
-  <button onclick="copytext()">📋 Metin Kopyala</button>
+  
+    <button onclick="copyText()">📋 Metin Kopyala</button>
 
   <script>
+    // Input event listener'ları
+    document.getElementById("decimalInput").addEventListener("input", function() {
+      decimalToText();
+      playBeep();
+    });
+    
     document.getElementById("binaryInput").addEventListener("input", function() {
       binaryToText();  
       playBeep();
     });
+    
     document.getElementById("textInput").addEventListener("input", function() {
       textToBinary();  
       playBeep();
@@ -125,22 +139,21 @@
       osc.stop(ctx.currentTime + 0.05);
     }
 
-    function binaryToText() {
-      let binaryStr = document.getElementById('binaryInput').value.replace(/\s+/g, '');
-      let bitLen = parseInt(document.getElementById("bitLength").value);
-      let chunks = [];
-      for (let i = 0; i < binaryStr.length; i += bitLen) {
-        chunks.push(binaryStr.substr(i, bitLen));
-      }
-      let text = chunks.map(bin => {
-        if (bin.length !== bitLen) return '';
-        return String.fromCharCode(parseInt(bin, 2));
+    // Decimal'den Metne çevirme
+    function decimalToText() {
+      let decimalStr = document.getElementById('decimalInput').value.trim();
+      if (!decimalStr) return;
+      
+      let decimals = decimalStr.split(/\s+/);
+      let text = decimals.map(dec => {
+        let charCode = parseInt(dec, 10);
+        if (isNaN(charCode)) return '';
+        return String.fromCharCode(charCode);
       }).join('');
+      
       document.getElementById('textInput').value = text;
-    }
-
-    function textToBinary() {
-      let text = document.getElementById('textInput').value;
+      
+      // Ayrıca binary'yi de güncelle
       let bitLen = parseInt(document.getElementById("bitLength").value);
       let binary = text.split('').map(ch => {
         let bin = ch.charCodeAt(0).toString(2);
@@ -149,7 +162,48 @@
       document.getElementById('binaryInput').value = binary;
     }
 
-    function copytext() {
+    // Binary'den Metne çevirme
+    function binaryToText() {
+      let binaryStr = document.getElementById('binaryInput').value.replace(/\s+/g, '');
+      if (!binaryStr) return;
+      
+      let bitLen = parseInt(document.getElementById("bitLength").value);
+      let chunks = [];
+      for (let i = 0; i < binaryStr.length; i += bitLen) {
+        chunks.push(binaryStr.substr(i, bitLen));
+      }
+      let text = chunks.map(bin => {
+        if (bin.length !== bitLen || !/^[01]+$/.test(bin)) return '';
+        return String.fromCharCode(parseInt(bin, 2));
+      }).join('');
+      
+      document.getElementById('textInput').value = text;
+      
+      // Ayrıca decimal'i de güncelle
+      let decimals = text.split('').map(ch => ch.charCodeAt(0)).join(' ');
+      document.getElementById('decimalInput').value = decimals;
+    }
+
+    // Metinden Binary'ye çevirme
+    function textToBinary() {
+      let text = document.getElementById('textInput').value;
+      if (!text) return;
+      
+      let bitLen = parseInt(document.getElementById("bitLength").value);
+      let binary = text.split('').map(ch => {
+        let bin = ch.charCodeAt(0).toString(2);
+        return bin.padStart(bitLen, '0');
+      }).join(' ');
+      
+      document.getElementById('binaryInput').value = binary;
+      
+      // Ayrıca decimal'i de güncelle
+      let decimals = text.split('').map(ch => ch.charCodeAt(0)).join(' ');
+      document.getElementById('decimalInput').value = decimals;
+    }
+
+    // Kopyalama fonksiyonları
+    function copyText() {
       let resultText = document.getElementById('textInput').value;
       if (!resultText.trim()) {
         alert('Henüz kopyalanacak bir sonuç yok!');
@@ -160,7 +214,7 @@
       });
     }
 
-    function copybinary() {
+    function copyBinary() {
       let resultText = document.getElementById('binaryInput').value;
       if (!resultText.trim()) {
         alert('Henüz kopyalanacak bir sonuç yok!');
@@ -168,6 +222,17 @@
       }
       navigator.clipboard.writeText(resultText).then(() => {
         alert('Binary panoya kopyalandı!');
+      });
+    }
+
+    function copyDecimal() {
+      let resultText = document.getElementById('decimalInput').value;
+      if (!resultText.trim()) {
+        alert('Henüz kopyalanacak bir sonuç yok!');
+        return;
+      }
+      navigator.clipboard.writeText(resultText).then(() => {
+        alert('Decimal panoya kopyalandı!');
       });
     }
   </script>
